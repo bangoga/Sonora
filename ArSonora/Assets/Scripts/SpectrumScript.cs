@@ -21,12 +21,12 @@ public class SpectrumScript : MonoBehaviour
 
     void Update()
     {
-        //debugVisualizer();
+        debugVisualizer();
     }
 
     void debugVisualizer()
     {
-        audio.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
+        audio.GetSpectrumData(spectrum, 0, FFTWindow.Hamming);
 
         for (int i = 1; i < spectrum.Length - 1; i++)
         {
