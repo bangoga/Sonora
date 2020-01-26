@@ -672,6 +672,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bb2152f34f581745a5ecb09d89f98b8, type: 3}
+--- !u!1 &1536891456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8538026075405872075, guid: 6bb2152f34f581745a5ecb09d89f98b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1536891455}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1832784113
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +689,7 @@ GameObject:
   - component: {fileID: 1832784115}
   - component: {fileID: 1832784114}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Tap To Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -702,7 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 675539104}
-  objectToPlace: {fileID: 0}
+  objectToPlace: {fileID: 1536891456}
 --- !u!4 &1832784115
 Transform:
   m_ObjectHideFlags: 0
