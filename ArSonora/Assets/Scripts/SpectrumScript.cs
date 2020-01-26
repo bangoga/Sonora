@@ -40,7 +40,7 @@ public class SpectrumScript : MonoBehaviour
     {
         audio.Stop();
         //Start recording to audioclip from the mic
-        audio.clip = Microphone.Start(null, true, 10, 44100);
+        audio.clip = Microphone.Start(null, true, 100, 44100);
         audio.loop = true;
         // Mute the sound with an Audio Mixer group becuase we don't want the player to hear it
         Debug.Log(Microphone.IsRecording(null).ToString());

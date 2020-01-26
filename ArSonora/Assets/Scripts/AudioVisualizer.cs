@@ -32,11 +32,9 @@ public class AudioVisualizer : MonoBehaviour
         float[] spectrum = new float[range];
         src.GetSpectrumData (spectrum, 0, FFTWindow.Hanning);
         for (int i = 0; i < cubes.Length; i++) {
-            Vector3 previousScale = cubes [i].transform.localScale;
-            previousScale.y = Mathf.Lerp (previousScale.y, spectrum [i] * scale, Time.deltaTime * updateSpeed);
-            cubes[i].transform.localScale = previousScale;
-            cubes[i].transform.position = new Vector3(cubes[i].transform.position.x, previousScale.y/2f,cubes[i].transform.position.z);
-            cubes[i].GetComponent<Renderer>().material.SetColor("_Color", Color.HSVToRGB(0.67f-(spectrum [i]*3.5f), 1, 1));
+            cubes [i].transform.localScale = new Vector3(cubes[i].transform.localScale.x, spectrum [i] * scale * 50, cubes[i].transform.localScale.x);;
+            cubes[i].transform.position = new Vector3(cubes[i].transform.position.x, (spectrum [i] * scale)/2f, cubes[i].transform.position.z);
+            cubes[i].GetComponent<Renderer>().material.SetColor("_Color", Color.HSVToRGB(0.67f-(spectrum [i]*4f), 1, 1));
         }
         for (int i = 0; i < numberOfObjects; i++) {
             cubes[i].transform.Rotate (0, rotateSpeed, 0);		
