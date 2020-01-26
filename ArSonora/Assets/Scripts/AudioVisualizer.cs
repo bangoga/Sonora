@@ -34,9 +34,10 @@ public class AudioVisualizer : MonoBehaviour
 			Vector3 previousScale = cubes [i].transform.localScale;
 			previousScale.y = Mathf.Lerp (previousScale.y, spectrum [i] * scale, Time.deltaTime * updateSpeed);
 			cubes[i].transform.localScale = previousScale;
+			//cubes[i].GetComponent<Material>().SetColor();
 		}
 		for (int i = 0; i < numberOfObjects; i++) {
-			cubes [i].transform.Rotate (0, rotateSpeed, 0);		
+			cubes[i].transform.Rotate (0, rotateSpeed, 0);		
 		}
 	}
 }

@@ -11,6 +11,7 @@ public class TapToPlace : MonoBehaviour
     public GameObject objectToPlace;
     
     private ARRaycastManager rayManager;
+    private ARSessionOrigin arOrigin;
     private GameObject current;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
@@ -18,6 +19,8 @@ public class TapToPlace : MonoBehaviour
     void Start()
     {
         rayManager = FindObjectOfType<ARRaycastManager>();
+        arOrigin = FindObjectOfType<ARSessionOrigin>();
+        objectToPlace.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,14 +36,9 @@ public class TapToPlace : MonoBehaviour
 
     private void PlaceObject()
     {
-        if (current == null)
-        {
-            current = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
-        }
-        else
-        {
-            current.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
-        }
+        //objectToPlace.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+        arOrigin.MakeContentAppearAt(objectToPlace.transform, placementPose.position, placementPose.rotation);
+        objectToPlace.SetActive(true);
     }
 
     private void UpdatePlacementPose()
