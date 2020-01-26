@@ -8,8 +8,10 @@ using UnityEngine.XR.ARSubsystems;
 public class TapToPlace : MonoBehaviour
 {
     public GameObject visual;
+    public GameObject objectToPlace;
     
     private ARRaycastManager rayManager;
+    private GameObject current;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
     // Start is called before the first frame update
@@ -22,6 +24,23 @@ public class TapToPlace : MonoBehaviour
     void Update()
     {
         UpdatePlacementPose();
+
+        if (placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            PlaceObject();
+        }
+    }
+
+    private void PlaceObject()
+    {
+        if (current != null)
+        {
+            current = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        }
+        else
+        {
+            current.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+        }
     }
 
     private void UpdatePlacementPose()
@@ -36,8 +55,6 @@ public class TapToPlace : MonoBehaviour
             var cameraForward = Camera.current.transform.forward;
             var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
             placementPose.rotation = Quaternion.LookRotation(cameraBearing);
-            if(!visual.activeInHierarchy)
-                visual.SetActive(true);
             visual.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
         }
     }
