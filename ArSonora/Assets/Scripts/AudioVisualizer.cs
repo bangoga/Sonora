@@ -18,13 +18,14 @@ public class AudioVisualizer : MonoBehaviour
 
 	void Start ()
 	{
+		cubes = new GameObject[numberOfObjects];
 		for (int i = 0; i < numberOfObjects; i++) {
 			float angle = i * Mathf.PI * 2 / numberOfObjects;
 			Vector3 pos = new Vector3 (Mathf.Cos (angle), 0, Mathf.Sin (angle)) * radius;
 			GameObject tmp = Instantiate(prefab, pos, Quaternion.identity);
 			tmp.transform.parent = parent.transform;
+			cubes[i] = tmp;
 		}
-		cubes = GameObject.FindGameObjectsWithTag("Cube");
 	}
 
 	void Update () {
@@ -34,7 +35,8 @@ public class AudioVisualizer : MonoBehaviour
 			Vector3 previousScale = cubes [i].transform.localScale;
 			previousScale.y = Mathf.Lerp (previousScale.y, spectrum [i] * scale, Time.deltaTime * updateSpeed);
 			cubes[i].transform.localScale = previousScale;
-			//cubes[i].GetComponent<Material>().SetColor();
+			cubes[i].transform.position = new Vector3(cubes[i].transform.position.x, previousScale.y/2f,cubes[i].transform.position.z);
+			cubes[i].GetComponent<Renderer>().material.SetColor("_Color", Color.HSVToRGB(0.67f-(spectrum [i]*3.5f), 1, 1));
 		}
 		for (int i = 0; i < numberOfObjects; i++) {
 			cubes[i].transform.Rotate (0, rotateSpeed, 0);		

@@ -9,12 +9,14 @@ public class TapToPlace : MonoBehaviour
 {
     public GameObject visual;
     public GameObject objectToPlace;
-    
+
     private ARRaycastManager rayManager;
     private ARSessionOrigin arOrigin;
     private GameObject current;
     private Pose placementPose;
+
     private bool placementPoseIsValid = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,7 @@ public class TapToPlace : MonoBehaviour
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
         rayManager.Raycast(screenCenter, hits, TrackableType.Planes);
         placementPoseIsValid = hits.Count > 0;
-        if(placementPoseIsValid)
+        if (placementPoseIsValid)
         {
             placementPose = hits[0].pose;
             var cameraForward = Camera.current.transform.forward;
