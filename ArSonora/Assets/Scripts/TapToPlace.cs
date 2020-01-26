@@ -33,7 +33,7 @@ public class TapToPlace : MonoBehaviour
 
     private void PlaceObject()
     {
-        if (current != null)
+        if (current == null)
         {
             current = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
         }
